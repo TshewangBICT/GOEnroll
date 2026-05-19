@@ -13,6 +13,11 @@ func InitializeRoutes() {
 	// creating a new router
 	router := mux.NewRouter()
 
+	// Auth
+	router.HandleFunc("/signup", controller.SignUp).Methods("POST")
+	router.HandleFunc("/login", controller.Login).Methods("POST")
+	router.HandleFunc("/logout", controller.LogOut)
+
 	// Student routes
 	router.HandleFunc("/student/all", controller.GetAllStuds).Methods("GET")
 	router.HandleFunc("/student/{sid}", controller.GetStud).Methods("GET")
@@ -26,6 +31,11 @@ func InitializeRoutes() {
 	router.HandleFunc("/course/{cid}", controller.GetCourse).Methods("GET")
 	router.HandleFunc("/course/{cid}", controller.UpdateCourse).Methods("PUT")
 	router.HandleFunc("/course/{cid}", controller.DeleteCourse).Methods("DELETE")
+
+	// Enroll routes
+	router.HandleFunc("/enroll", controller.Enroll).Methods("POST")
+	router.HandleFunc("/enroll/all", controller.GetAllEnrollments).Methods("GET")
+	router.HandleFunc("/enroll/{sid}/{cid}", controller.DeleteEnrollment).Methods("DELETE")
 
 	// load static files
 	fHandler := http.FileServer(http.Dir("./view"))

@@ -6,7 +6,7 @@ import (
 )
 
 type Course struct {
-	CourseId   int64  `json:"cid"`
+	CourseId   string `json:"cid"`
 	CourseName string `json:"coursename"`
 }
 
@@ -28,7 +28,7 @@ func (c *Course) Read() error {
 	return row.Scan(&c.CourseId, &c.CourseName)
 }
 
-func (c *Course) Update(old_cID int64) error {
+func (c *Course) Update(old_cID string) error {
 	row := postgres.Db.QueryRow(queryUpdateCourse, c.CourseId, c.CourseName, old_cID)
 	return row.Scan(&c.CourseId)
 }

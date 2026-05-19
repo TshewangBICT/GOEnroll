@@ -53,18 +53,12 @@ func getCourseId(courseID string) (int64, error) {
 }
 
 func GetCourse(w http.ResponseWriter, r *http.Request) {
+
 	myMap := mux.Vars(r)
 	cid := myMap["cid"]
-	cID, idErr := getCourseId(cid)
 
-	if idErr != nil {
-		httpResp.RespondWithError(w, http.StatusBadRequest, idErr.Error())
-		return
-	}
-
-	// no error
 	var cDetail model.Course
-	cDetail = model.Course{CourseId: cID}
+	cDetail = model.Course{CourseId: cid}
 
 	// pass course data to model
 	getErr := cDetail.Read()
@@ -82,13 +76,8 @@ func GetCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateCourse(w http.ResponseWriter, r *http.Request) {
-	oldCID := mux.Vars(r)["cid"]
-	old_cID, idErr := getUserId(oldCID)
 
-	if idErr != nil {
-		httpResp.RespondWithError(w, http.StatusBadRequest, idErr.Error())
-		return
-	}
+	oldCID := mux.Vars(r)["cid"]
 
 	var course model.Course
 	// extract the data from the request body sent by client
@@ -105,7 +94,7 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 	}
 	r.Body.Close()
 
-	updateErr := course.Update(old_cID)
+	updateErr := course.Update(oldCID)
 
 	if updateErr != nil {
 		switch updateErr {
@@ -121,18 +110,12 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteCourse(w http.ResponseWriter, r *http.Request) {
+
 	// processing the request
 	cid := mux.Vars(r)["cid"]
-	cID, idErr := getCourseId(cid)
 
-	if idErr != nil {
-		httpResp.RespondWithError(w, http.StatusBadRequest, idErr.Error())
-		return
-	}
-
-	// option1
-	stud := model.Course{CourseId: cID}
-	delErr := stud.Delete()
+	course := model.Course{CourseId: cid}
+	delErr := course.Delete()
 
 	if delErr != nil {
 		switch delErr {

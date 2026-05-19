@@ -12,6 +12,9 @@ import (
 )
 
 func AddStudent(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
 	// create a varibale of type student to store student info
 	var stud model.Student
 
@@ -52,6 +55,10 @@ func getUserId(userID string) (int64, error) {
 }
 
 func GetStud(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
+
 	myMap := mux.Vars(r)
 	stdid := myMap["sid"]
 	stdID, idErr := getUserId(stdid)
@@ -80,6 +87,10 @@ func GetStud(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateStud(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
+
 	oldSID := mux.Vars(r)["sid"]
 	old_stdID, idErr := getUserId(oldSID)
 
@@ -119,6 +130,10 @@ func UpdateStud(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteStud(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
+
 	// processing the request
 	sid := mux.Vars(r)["sid"]
 	stdID, idErr := getUserId(sid)
