@@ -15,9 +15,9 @@ import (
 
 // handler function to handle add enrollmwent
 func Enroll(w http.ResponseWriter, r *http.Request) {
-	if !VerifyCookie(w, r) {
-		return
-	}
+	// if !VerifyCookie(w, r) {
+	// 	return
+	// }
 
 	var e model.Enroll
 
@@ -46,9 +46,9 @@ func Enroll(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllEnrollments(w http.ResponseWriter, r *http.Request) {
-	if !VerifyCookie(w, r) {
-		return
-	}
+	// if !VerifyCookie(w, r) {
+	// 	return
+	// }
 
 	enrollments, err := model.GetAllEnrollments()
 	if err != nil {
@@ -59,9 +59,9 @@ func GetAllEnrollments(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteEnrollment(w http.ResponseWriter, r *http.Request) {
-	if !VerifyCookie(w, r) {
-		return
-	}
+	// if !VerifyCookie(w, r) {
+	// 	return
+	// }
 
 	vars := mux.Vars(r)
 	sid := vars["sid"]

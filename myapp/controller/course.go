@@ -13,6 +13,10 @@ import (
 )
 
 func AddCourse(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
+
 	// create a varibale of type course to store student info
 	var course model.Course
 
@@ -53,6 +57,9 @@ func getCourseId(courseID string) (int64, error) {
 }
 
 func GetCourse(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
 
 	myMap := mux.Vars(r)
 	cid := myMap["cid"]
@@ -76,6 +83,9 @@ func GetCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateCourse(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
 
 	oldCID := mux.Vars(r)["cid"]
 
@@ -110,6 +120,9 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteCourse(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
 
 	// processing the request
 	cid := mux.Vars(r)["cid"]
