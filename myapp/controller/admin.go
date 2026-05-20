@@ -58,30 +58,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// func LogOut(w http.ResponseWriter, r *http.Request) {
-// 	cookie := http.Cookie{
-// 		Name:    "my-cookie",
-// 		Expires: time.Now(),
-// 	}
-// 	http.SetCookie(w, &cookie)
-// 	httpResp.RespondWithJSON(w, http.StatusOK, map[string]string{"Status": "Logged Out"})
-// }
-
 func LogOut(w http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{
-		Name:     "my-cookie",
-		Value:    "",
-		Path:     "/",
-		Expires:  time.Unix(0, 0),
-		MaxAge:   -1,
-		HttpOnly: true,
+		Name:    "my-cookie",
+		Expires: time.Now(),
 	}
-
 	http.SetCookie(w, &cookie)
-
-	httpResp.RespondWithJSON(w, http.StatusOK, map[string]string{
-		"status": "Logged Out",
-	})
+	httpResp.RespondWithJSON(w, http.StatusOK, map[string]string{"Status": "Logged Out"})
 }
 
 // helper function to verify cookie
