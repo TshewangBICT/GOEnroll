@@ -63,7 +63,7 @@ func LogOut(w http.ResponseWriter, r *http.Request) {
 		Name:     "my-cookie",
 		Value:    "",
 		Path:     "/",
-		Expires:  time.Now().Add(-1 * time.Hour),
+		Expires:  time.Now().Add(-1 * time.Minute),
 		MaxAge:   -1,
 		HttpOnly: true,
 	}

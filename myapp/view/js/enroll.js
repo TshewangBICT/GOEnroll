@@ -46,7 +46,6 @@ function addEnroll() {
     })
     .then(response => {
         if (response.status === 201) {
-            alert("Enrolled successfully!");
             document.getElementById("sid").value = "";
             document.getElementById("cid").value = "";
             loadEnrollments();

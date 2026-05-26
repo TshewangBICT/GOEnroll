@@ -21,16 +21,23 @@ function login() {
 }
 
 function logout() {
-    fetch("/logout")
+    fetch("/logout", {
+        method: "GET",
+        credentials: "include"
+    })
     .then(response => {
         if (response.ok) {
+            // Clear all storage
             localStorage.clear();
             sessionStorage.clear();
-            window.open("/index.html", "_self")
+            // Force redirect
+            window.location.replace("/index.html");
         } else {
-            throw new Error(response.statusText)
+            throw new Error("Logout failed");
         }
     }).catch(e => {
-        alert(e)
+        console.error(e);
+        // Still redirect even if fetch fails
+        window.location.replace("/index.html");
     });
 }
