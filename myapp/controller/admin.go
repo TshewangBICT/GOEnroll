@@ -60,11 +60,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 func LogOut(w http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{
-		Name:    "my-cookie",
-		Value:   "",
-		Path:    "/",
-		Expires: time.Now().Add(-1 * time.Hour),
-		MaxAge:  -1,
+		Name:     "my-cookie",
+		Value:    "",
+		Path:     "/",
+		Expires:  time.Now().Add(-1 * time.Hour),
+		MaxAge:   -1,
+		HttpOnly: true,
 	}
 	http.SetCookie(w, &cookie)
 	httpResp.RespondWithJSON(w, http.StatusOK, map[string]string{"Status": "Logged Out"})
